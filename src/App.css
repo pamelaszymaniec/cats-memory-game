@@ -2,9 +2,10 @@
   max-width: 860px;
   margin: 40px auto;
 }
+
 button {
   background: none;
-  border: 2px solid #fff;
+  border: 2px solid #e90052;
   padding: 6px 12px;
   border-radius: 4px;
   color: #fff;
@@ -12,7 +13,15 @@ button {
   cursor: pointer;
   font-size: 1em;
 }
+
 button:hover {
-  background: #c23866;
+  background: #e90052;
   color: #fff;
+}
+
+.card-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap:20px;
 }
