@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Cats Memory</h1>
+      <h1>Cats Memory Game 🐱</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className="card-grid">
         {cards.map((card) => (
