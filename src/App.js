@@ -23,9 +23,10 @@ function App() {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.floor(Math.random() * 10000000) }));
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
-    console.log(shuffledCards);
   };
 
   //handle a choice
@@ -33,6 +34,12 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
+  //start a new game automatically
+  useEffect(() => {
+    shuffleCards();
+  }, []);
+
+  //compare cards
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       setDisabled(true);
@@ -48,13 +55,11 @@ function App() {
         });
         resetTurn();
       } else {
-        console.log("Those card dont match");
         setTimeout(() => resetTurn(), 1000);
       }
     }
   }, [choiceOne, choiceTwo]);
 
-  console.log("Cards: ", cards);
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -77,6 +82,7 @@ function App() {
           />
         ))}
       </div>
+      <p>Turns: {turns}</p>
     </div>
   );
 }
