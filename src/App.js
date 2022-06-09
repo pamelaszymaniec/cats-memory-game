@@ -3,12 +3,12 @@ import "./App.css";
 import SingleCard from "./components/SingleCard";
 
 const cardImages = [
-  { src: "/img/cat-1.png" },
-  { src: "/img/cat-2.png" },
-  { src: "/img/cat-3.png" },
-  { src: "/img/cat-4.png" },
-  { src: "/img/cat-5.png" },
-  { src: "/img/cat-6.png" },
+  { src: "/img/cat-1.png", matched: false },
+  { src: "/img/cat-2.png", matched: false },
+  { src: "/img/cat-3.png", matched: false },
+  { src: "/img/cat-4.png", matched: false },
+  { src: "/img/cat-5.png", matched: false },
+  { src: "/img/cat-6.png", matched: false },
 ];
 
 function App() {
@@ -29,7 +29,6 @@ function App() {
 
   //handle a choice
   const handleChoice = (card) => {
-    console.log(card);
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
@@ -38,15 +37,24 @@ function App() {
       console.log(choiceOne.src);
       console.log(choiceTwo.src);
       if (choiceOne.src === choiceTwo.src) {
-        console.log("Mamy to");
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+            if (card.src === choiceOne.src) {
+              return { ...card, matched: true };
+            } else {
+              return card;
+            }
+          });
+        });
         resetTurn();
       } else {
-        console.log("Nie mamy to");
+        console.log("Those card dont match");
         resetTurn();
       }
     }
   }, [choiceOne, choiceTwo]);
 
+  console.log("Cards: ", cards);
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
